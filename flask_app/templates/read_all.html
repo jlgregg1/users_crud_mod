@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>View User</title>
+</head>
+<body>
+    <div class="container">
+        <h1>User list:</h1>
+        <table class = "table table-striped">
+            <thead>
+                <tr>
+                    <th scope = "col">ID</th>
+                    <th scope = "col">Full name</th>
+                    <th scope = "col">Email</th>
+                    <th scope = "col">Created at</th>
+                    <th scope = "col">Actions</th>
+                </tr>
+            </thead>
+            <tbody> <!--can iterate through list of all_users created in user.py-->
+                {% for one_user in all_users: %} <!--check to see that all_users is defined in route return-->
+                    <tr>
+                        <td>{{one_user.id}}</td>
+                        <td>{{one_user.first_name}} {{one_user.last_name}}</td> <!--since one_user is an instance of the User class, its properties can be referenced using dot syntax-->
+                        <td>{{one_user.email}}</td>
+                        <td>{{one_user.created_at.strftime("%B %d, %Y %H:%M")}}</td>
+                        <td><a href = "/users/{{one_user.id}}/view_one">Show</a>  <a href = "/users/{{one_user.id}}/edit">Edit</a>  <a href = "/users/{{one_user.id}}/delete">Delete</a></td>
+                    </tr>
+                {% endfor %} <!--must end for loop-->
+            </tbody>
+        </table>
+        <a href = "/users/new">Add a new user</a>
+    </div>
+</body>
+</html>
